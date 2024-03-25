@@ -65,3 +65,10 @@ def register_view(request):
 def home_content(request):
     return render(request, 'quiz.html')
 
+class DeleteUser(APIView):
+    def delete(self,request,pk):
+        user = User.objects.filter(id=pk).first()
+        if user is None:
+            return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+        user.delete()
+        return Response({"message": "User deleted"}, status=status.HTTP_204_NO_CONTENT)
