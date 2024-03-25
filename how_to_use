@@ -1,0 +1,6 @@
+# Cài xampp
+# Cách chạy:
+# Mở xampp, chọn start Apache và MySql
+# Chọn Admin của MySql, chọn 'mới'
+# Tạo hệ csdl tên 'django'
+# Mở terminal và chọn đường dẫn final_project_demo gõ python manage.py migrate sau đó python manage.py runserver
