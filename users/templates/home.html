@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Website Langing Page Design</title>
+    <link rel="stylesheet" href="{% static 'css/styles_home.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+    <section>
+
+        <header>
+            <h2><a href="#" class="logo">Quizlet</a></h2>
+            <div class="navigation">
+                <a href="#">Trang chủ</a>
+                <a href="#">Chủ đề</a>
+                <a href="#">Thông tin</a>
+                <a href="#">Dịch vụ</a>
+                <a href="#">Liên hệ</a>
+
+            </div>
+        </header>
+        <div class="content">
+            <div class="info">
+                <h2>Thẻ ghi nhớ kỹ thuật số và các công cụ học tốt nhất<br><span></span></h2>
+                <p>Tham gia cùng hơn 60 triệu học sinh, bạn có thể tận dụng các thẻ ghi nhớ kỹ thuật số trên nền tảng
+                    khoa học của Quizlet. Đây là công cụ học tốt nhất để nâng cao điểm số và đạt được mục tiêu học tập
+                    của bạn. Với các bài kiểm tra thử và
+                    lời giải chuyên gia, bạn có thể tăng cường kiến thức một cách hiệu quả và nhanh chóng. Đừng bỏ lỡ cơ
+                    hội cải thiện học vấn của mình với Quizlet!</p>
+
+                <a href="{% url 'home_login' %}" class="info-btn">Đăng ký ngay</a>
+            </div>
+
+        </div>
+    </section>
+    <div class="content-1">
+        <div class="info">
+            <h2>90% học sinh sử dụng Quizlet cho biết họ đã cải thiện được điểm số.</h2>
+        </div>
+    </div>
+    <div class="content-2">
+        <div class="info">
+            <h2>Ghi nhớ nhanh hơn, miễn phí</h2>
+            <p>Nghiên cứu cho thấy việc tự kiểm tra bằng thẻ ghi nhớ sẽ hiệu quả hơn việc đọc lại ghi chú của bạn. Từ
+                toán học, y học đến ngôn ngữ hiện đại, Quizlet được học sinh sử dụng trong hơn 100 chủ đề khác nhau.</p>
+        </div>
+        <div class="info">
+            <img src="{% static 'img/chemistry 1.jpg' %}" alt="">
+        </div>
+    </div>
+    <div class="content-3">
+
+        <div class="info">
+            <img src="{% static 'img/img.jpg' %}" alt="">
+        </div>
+        <div class="info">
+            <h2>Thời gian đi lại hôm qua, hôm nay lại là buổi học</h2>
+            <p> Học ở mọi nơi – ngay cả khi ngoại tuyến – với ứng dụng iOS và Android của chúng tôi. Tiến trình của bạn
+                được đồng bộ hóa giữa điện thoại và máy tính.</p>
+            <div class="ch-sto">
+                <img src="https://assets.quizlet.com/_next/static/media/apple_vi.7cb45bba.png" alt="">
+                <img src="https://assets.quizlet.com/_next/static/media/google_play_vi.dd1f5851.png" alt="">
+            </div>
+        </div>
+    </div>
+
+    <div class="content-1">
+        <div class="info">
+            <h2 style="margin-left: 250px ;">Các học sinh nói gì về Quizlet</h2>
+        </div>
+    </div>
+
+    <div class="content-4">
+        <div class="content-item">
+            <img src="https://images.prismic.io/quizlet-web/ZDUwYTNjZmMtYzgwNC00NzEwLTgyYzMtNTU5NTJhNmExYWE4_8568c5a7-2554-43c5-81bf-322169240769_image281229.png?auto=compress,format&rect=0,0,310,236&w=310&h=236"
+                alt="Name" class="member-img">
+            <p class="member-name">“Quizlet đã tiếp sức cho thành công của tôi từ khi còn học trung học. Những tấm thẻ
+                ghi nhớ có thể dùng ngay khi đang di chuyển đang hỗ trợ đắc lực cho tôi ở đại học”.</p>
+            <span>Hamza, năm cuối, Y học</span>
+        </div>
+        <div class="content-item">
+
+            <img src="https://images.prismic.io/quizlet-web/ZGE2MTYyODMtYWFkMS00YmVkLTgwMWUtY2EyNzZiMjYzYzQ0_17a32b86-e009-47f6-acb0-cdc8e89d35c4_06sydney1.png?auto=compress,format&rect=0,0,930,704&w=930&h=704"
+                alt="Name" class="member-img">
+            <p class="member-name">“Chế độ Học là điều tuyệt vời nhất từng có từ Quizlet. Nó hiển thị cho bạn các thuật
+                ngữ theo cách dễ ghi nhớ nhất."</p>
+            <span>Sydney, năm hai, Sinh học</span>
+        </div>
+        <div class="content-item">
+
+            <img src="https://images.prismic.io/quizlet-web/YWJlZTAzOTQtZGI3OC00Y2ZkLWFiNzgtYTUyZjk4NmM1OWRm_8160414d-ed6b-41ce-9654-18fc839916f6_oscarandowenphotoforushomepage_fullsize281291.png?auto=compress,format&rect=0,0,793,601&w=793&h=601"
+                alt="Name" class="member-img">
+            <p class="member-name">“Tất cả bạn bè của chúng tôi đều sử dụng Quizlet. Đây là một cách học thú vị và chúng
+                tôi thấy tự tin hơn khi chuẩn bị cho kỳ thi giữa kỳ và cuối kỳ."<br></p>
+            <span>Owen & Oscar, học sinh năm hai
+                phổ thông</span>
+        </div>
+    </div>
+    <div class="content-5">
+        <div class="content-item">
+            <h4>Giáo viên</h4>
+            <h2>Truyền năng lượng cho học sinh của bạn </h2>
+            <p>Giúp các em tự tin học bất cứ nội dung nào, dù cho mục tiêu phấn đấu có là gì đi nữa. Sử dụng các học
+                phần miễn phí, chế độ học và trò chơi Cột mốc trong lớp của Quizlet, bạn có thể ngay lập tức tạo ra một
+                lớp học tương tác cao hơn. Học sinh
+                và giáo viên có thể đăng ký và học miễn phí.</p>
+        </div>
+        <div class="content-item">
+            <img src="https://images.prismic.io/quizlet-web/ZjY4YjVkMmUtNmU0NS00ZDBlLTg5YzItOTgwMjhhMzJiMWU5_d5b00568-a324-488f-b16b-44480144cb81_imagefortextcallout28329.png?auto=compress,format&rect=0,0,501,500&w=501&h=500"
+                alt="" class="img-5">
+
+        </div>
+    </div>
+    <div class="content-6">
+        <div class="content-item">
+            <h4>Giới thiệu</h4>
+            <a href="">
+                <span>Giới thiệu về Quizlet</span>
+            </a>
+            <a href="">
+                <span>Tuyển dụng</span>
+            </a>
+            <a href="">
+                <span>Quảng cáo trên Quizlet</span>
+            </a>
+            <a href="">
+                <span>Tải ứng dụng</span>
+            </a>
+        </div>
+        <div class="content-item">
+            <h4>Dành cho học sinh</h4>
+            <a href="">
+                <span>Thẻ ghi nhớ</span>
+            </a>
+            <a href="">
+                <span>Kiểm tra</span>
+            </a>
+            <a href="">
+                <span>Học</span>
+            </a>
+            <a href="">
+                <span>Lời giải</span>
+            </a>
+            <a href="">
+                <span>Q-Chat: gia sư AI của bạn</span>
+            </a>
+            <a href="">
+                <span>Lặp lại ngắt quãng</span>
+            </a>
+            <a href="">
+                <span>Modern Learning Lab</span>
+            </a>
+            <a href="">
+                <span>Quizlet Plus</span>
+            </a>
+        </div>
+        <div class="content-item">
+            <h4>Dành cho giáo viên</h4>
+            <a href="">
+                <span>Live</span>
+            </a>
+            <a href="">
+                <span>Cột mốc</span>
+            </a>
+            <a href="">
+                <span>Blog</span>
+            </a>
+            <a href="">
+                <span>Quizlet Plus cho giáo viên</span>
+            </a>
+        </div>
+        <div class="content-item">
+            <h4>Tài nguyên</h4>
+            <a href="">
+                <span>Trung tâm hỗ trợ
+                </span>
+            </a>
+            <a href="">
+                <span>Đăng ký</span>
+            </a>
+            <a href="">
+                <span>Quy tắc danh dự</span>
+            </a>
+            <a href="">
+                <span>Nguyên tắc cộng đồng</span>
+            </a>
+            <a href="">
+                <span> Quyền riêng tư</span>
+            </a>
+            <a href="">
+                <span> Điều khoản</span>
+            </a>
+            <a href="">
+                <span> Chính sách quảng cáo và cookie</span>
+            </a>
+            <a href="">
+                <span> Quizlet cho trường học</span>
+            </a>
+
+        </div>
+        <div class="content-item">
+            <h4>Ngôn ngữ</h4>
+            <a href="">
+                <span></span>
+            </a>
+        </div>
+    </div>
+    <div class="footer">
+
+        <div class="media-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </div>
+</body>
+
+</html>
