@@ -16,10 +16,11 @@ class Register(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         messages.success(request, 'Account created successfully')
-        return HttpResponseRedirect(reverse('home_login'))
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 class loginView(APIView):
     def post(self,request):
+        records = User.objects.all()
         email = request.data['email']
         password = request.data['password']
         user = User.objects.filter(email=email).first()
@@ -27,8 +28,9 @@ class loginView(APIView):
             raise AuthenticationFailed('User not found')    
         if not user.check_password(password):
             raise AuthenticationFailed('Incorrect password')
+        # return Response({'message':'login success'})
+        return render(request,'quiz.html',{'records':records})
         
-        return HttpResponseRedirect(reverse('home'))
     
 
 class LogoutView(APIView):
@@ -36,9 +38,9 @@ class LogoutView(APIView):
         response = Response()
         response.delete_cookie('jwt')
         response.data = {
-            'message': 'success'
+            'message': ' logout success'
         }
-        return HttpResponseRedirect(reverse('home_login'))
+        return response
 class UserDetailView(APIView):
     def get(self,request,pk):
         user = User.objects.filter(id=pk).first()
@@ -46,6 +48,42 @@ class UserDetailView(APIView):
             return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
         serializer = UserSerializer(user)
         return Response(serializer.data)
+    def put(self,request,pk):   
+        user = User.objects.filter(id=pk).first()
+        if user is None:
+            return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+        serializer = UserSerializer(user, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+    def delete(self,request,pk):
+        user = User.objects.filter(id=pk).first()
+        if user is None:
+            return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+        user.delete()
+        return Response({"message": "User deleted"}, status=status.HTTP_204_NO_CONTENT)
+
+    def update(self, request, pk):
+        try:
+            user = User.objects.get(id=pk)
+        except User.DoesNotExist:
+            return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        # Cập nhật dữ liệu người dùng từ các tham số truyền vào
+        if 'username' in request.data:
+            user.username = request.data['username']
+        if 'email' in request.data:
+            user.email = request.data['email']
+        # Thêm các trường khác cần cập nhật nếu có
+
+        # Lưu lại thay đổi
+        user.save()
+
+        # Tạo serializer với dữ liệu người dùng đã được cập nhật
+        serializer = UserSerializer(user)
+
+        return Response(serializer.data)
+
 
 class UserListView(APIView):
     def get(self, request):
@@ -56,9 +94,6 @@ class UserListView(APIView):
 
 def home(request):
     return render(request, 'login.html')
-
-def home_view(request):
-    return render(request, 'home.html')
 
 def register_view(request):
     return render(request, 'register.html')
