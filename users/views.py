@@ -16,20 +16,27 @@ class Register(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         messages.success(request, 'Account created successfully')
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return HttpResponseRedirect(reverse('login_view'))
 
 class loginView(APIView):
     def post(self,request):
-        records = User.objects.all()
         email = request.data['email']
         password = request.data['password']
         user = User.objects.filter(email=email).first()
-        if user is None:
+        records = None
+        if user is not None:
+            if user.id == 2:
+                records = User.objects.all()
+            else:
+                records = User.objects.filter(id=user.id)
+        else:
             raise AuthenticationFailed('User not found')    
+
         if not user.check_password(password):
             raise AuthenticationFailed('Incorrect password')
-        # return Response({'message':'login success'})
+
         return render(request,'quiz.html',{'records':records})
+
         
     
 
