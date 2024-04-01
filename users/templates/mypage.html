@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Page</title>
+    <link rel="stylesheet" href="{% static 'css/styles_mypage.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <h2><a href="#" class="logo">Quizlet</a></h2>
+        <div class="search-bar">
+            <input type="text" placeholder="Tìm kiếm...">
+        </div>
+        <div class="navigation">
+            <a href="#" onclick="showLibrary()">Thư viện</a>
+            <a href="#">Chủ đề</a>
+            <a href="#">Liên hệ</a>
+            <a href="#">Tài khoản</a>
+            <div id="libraryItems" class="library-items">
+                <a href="#">Lớp</a>
+                <a href="#">Học phần</a>
+                <a href="#">Thư mục</a>
+            </div>
+        </div>
+    </header>
+    <div class="content">
+        <h1>Nội dung</h1>
+    </div>
+    <div class="container">
+        <div class="box">
+            <div class="title">Chủ đề 1</div>
+            <div class="description-box">
+                <div class="description">14 thẻ</div>
+            </div>
+            
+        </div>
+        <div class="box">
+            <div class="title">Chủ đề 2</div>
+            <div class="description-box">
+                <div class="description">14 thẻ</div>
+            </div>
+            
+        </div>
+        <div class="box">
+            <div class="title">Chủ đề 3</div>
+            <div class="description-box">
+                <div class="description">14 thẻ</div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="content-6">
+        <div class="content-item">
+            <h4>Giới thiệu</h4>
+            <a href="">
+                <span>Giới thiệu về Quizlet</span>
+            </a>
+            <a href="">
+                <span>Tuyển dụng</span>
+            </a>
+            <a href="">
+                <span>Quảng cáo trên Quizlet</span>
+            </a>
+            <a href="">
+                <span>Tải ứng dụng</span>
+            </a>
+        </div>
+        <div class="content-item">
+            <h4>Dành cho học sinh</h4>
+            <a href="">
+                <span>Thẻ ghi nhớ</span>
+            </a>
+            <a href="">
+                <span>Kiểm tra</span>
+            </a>
+            <a href="">
+                <span>Học</span>
+            </a>
+            <a href="">
+                <span>Lời giải</span>
+            </a>
+            <a href="">
+                <span>Q-Chat: gia sư AI của bạn</span>
+            </a>
+            <a href="">
+                <span>Lặp lại ngắt quãng</span>
+            </a>
+            <a href="">
+                <span>Modern Learning Lab</span>
+            </a>
+            <a href="">
+                <span>Quizlet Plus</span>
+            </a>
+        </div>
+        <div class="content-item">
+            <h4>Dành cho giáo viên</h4>
+            <a href="">
+                <span>Live</span>
+            </a>
+            <a href="">
+                <span>Cột mốc</span>
+            </a>
+            <a href="">
+                <span>Blog</span>
+            </a>
+            <a href="">
+                <span>Quizlet Plus cho giáo viên</span>
+            </a>
+        </div>
+        <div class="content-item">
+            <h4>Tài nguyên</h4>
+            <a href="">
+                <span>Trung tâm hỗ trợ
+                </span>
+            </a>
+            <a href="">
+                <span>Đăng ký</span>
+            </a>
+            <a href="">
+                <span>Quy tắc danh dự</span>
+            </a>
+            <a href="">
+                <span>Nguyên tắc cộng đồng</span>
+            </a>
+            <a href="">
+                <span> Quyền riêng tư</span>
+            </a>
+            <a href="">
+                <span> Điều khoản</span>
+            </a>
+            <a href="">
+                <span> Chính sách quảng cáo và cookie</span>
+            </a>
+            <a href="">
+                <span> Quizlet cho trường học</span>
+            </a>
+
+        </div>
+        <div class="content-item">
+            <h4>Ngôn ngữ</h4>
+            <a href="">
+                <span></span>
+            </a>
+        </div>
+    </div>
+    <div class="footer">
+
+        <div class="media-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    
+    <script src="{% static 'js/script_mypage.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,220 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400:500;600;700;800;900;&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    height: 4300px;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 80px;
+    /* padding: 30px 100px; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* z-index: 1000; */
+}
+
+header h2 {
+    padding: 30px 0px 30px 30px;
+}
+
+header .navigation {
+    height: 100%;
+    line-height: 80px;
+    display: inline-block;
+}
+header .logo {
+    position: relative;
+    color: #222;
+    font-size: 30px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+header .navigation a {
+    text-decoration: none;
+    font-weight: bold;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 15px;
+    color: #222;
+    padding: 0 10px;
+    display: inline-block;
+    font-weight: 545;
+}
+
+header .navigation a:not(:last-child) {
+    margin-right: 30px;
+}
+
+header .navigation a:hover {
+    background: powderblue;
+    border-radius: 20px;
+}
+
+.search-bar {
+    position: relative;
+    margin-right: 20px; /* Để tạo khoảng cách với phần tử tiếp theo */
+}
+
+.search-bar input[type="text"] {
+    width: 400px; /* Độ rộng của ô tìm kiếm */
+    padding: 10px; /* Khoảng cách bên trong của ô tìm kiếm */
+    border: 1px solid #ccc; /* Viền ô tìm kiếm */
+    border-radius: 20px; /* Độ cong của viền */
+    outline: none; /* Loại bỏ đường viền khi ô tìm kiếm được chọn */
+    transition: all 0.3s ease-in-out; /* Hiệu ứng chuyển đổi mượt mà */
+}
+
+.search-bar input[type="text"]:focus {
+    border-color: #007bff; /* Màu viền khi ô tìm kiếm được chọn */
+    box-shadow: 0 0 5px #007bff; /* Hiệu ứng bóng đổ khi ô tìm kiếm được chọn */
+}
+
+.search-bar input[type="text"]::placeholder {
+    color: #999; /* Màu chữ gợi ý */
+    font-style: italic; /* Font chữ nghiêng cho chữ gợi ý */
+}
+.library-items {
+    display: none;
+    position: absolute;
+    top: 60px; /* Điều chỉnh vị trí xuất phát từ top của thanh navigation */
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+.navigation {
+    position: relative; /* Cần thiết cho việc định vị tuyệt đối của phần libraryItems */
+}
+
+.library-items a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    padding: 8px 15px;
+    transition: background-color 0.3s ease;
+}
+
+.library-items a:hover {
+    background-color: #f0f0f0;
+}
+.content h1 {
+    margin-top: 100px;
+    padding: 0px 0px 0px 10px;
+    font-size: 24px; /* Kích thước font */
+    font-weight: bold; /* Độ đậm */
+    color: #333; /* Màu chữ */
+    margin-bottom: 5px; /* Khoảng cách dưới */
+    flex-direction: column;
+}
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.box {
+    flex: 1;
+    background-color: #f0f0f0;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 5px;
+}
+.title {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.description {
+    color: #666;
+}
+
+.description-box {
+    background-color: #aaf; /* Màu xanh */
+    padding: 10px; /* Padding để tạo khoảng trống xung quanh văn bản */
+    border-radius: 5px; /* Bo tròn góc của khung */
+    display: inline-block; /* Đảm bảo khung chỉ có đủ kích thước cần thiết */
+}
+
+.content-6 {
+    margin-top: 100px;
+    margin-left: 110px;
+    /* flex-wrap: wrap; */
+    display: flex;
+    border-bottom: #bbbec6 1px solid;
+    padding-bottom: 100px;
+    margin-right: 100px;
+}
+
+.content-6 .content-item {
+    padding: 0 45px;
+    text-align: center;
+    font-size: 1.25rem;
+    letter-spacing: normal;
+    line-height: 1.5;
+    font-weight: 750;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    color: #282e3e;
+}
+
+.content-6 .content-item a {
+    display: inline-block;
+    width: 100%;
+    /* Đảm bảo các phần tử con chiếm toàn bộ chiều rộng của div */
+    /* Khoảng cách giữa các phần tử */
+    text-decoration: none;
+    /* Loại bỏ gạch chân mặc định của thẻ a */
+    margin-top: 20px;
+    text-align: left;
+    font-size: 0.87rem;
+    color: #282e3e;
+    font-weight: 575;
+    line-height: 1.4285714285714286;
+    letter-spacing: normal;
+}
+
+.content-6 .content-item a:hover {
+    color: #4255ff;
+}
+.media-icons {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.media-icons a {
+    position: relative;
+    color: #111;
+    font-size: 25px;
+}
+
+.media-icons a:not(:last-child) {
+    margin-right: 60px;
+}
+
+.media-icons a:hover {
+    transform: scale(1.5);
+}

@@ -16,37 +16,24 @@ class Register(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         messages.success(request, 'Account created successfully')
-<<<<<<< HEAD
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-=======
-        return HttpResponseRedirect(reverse('login_view'))
->>>>>>> 6692697f9c6d5b504832f1eceeb89af56617a4fa
+
+from django.shortcuts import redirect
+from django.urls import reverse
 
 class loginView(APIView):
-    def post(self,request):
-        records = User.objects.all()
-        email = request.data['email']
-        password = request.data['password']
-        user = User.objects.filter(email=email).first()
-        records = None
-        if user is not None:
-            if user.id == 2:
-                records = User.objects.all()
-            else:
-                records = User.objects.filter(id=user.id)
-        else:
-            raise AuthenticationFailed('User not found')    
+    def post(self, request):
+        email = request.data.get('email')
+        password = request.data.get('password')
 
+        # Thực hiện xác thực người dùng
+        user = User.objects.filter(email=email).first()
+        if user is None:
+            raise AuthenticationFailed('User not found')
         if not user.check_password(password):
             raise AuthenticationFailed('Incorrect password')
-<<<<<<< HEAD
-        # return Response({'message':'login success'})
-        return render(request,'quiz.html',{'records':records})
-=======
+        return redirect(reverse('my_page')) 
 
-        return render(request,'quiz.html',{'records':records})
-
->>>>>>> 6692697f9c6d5b504832f1eceeb89af56617a4fa
         
     
 
@@ -110,18 +97,15 @@ class UserListView(APIView):
     
 
 def home(request):
-<<<<<<< HEAD
     return render(request, 'home.html')
-=======
-    return render(request, 'login.html')
-
->>>>>>> 6692697f9c6d5b504832f1eceeb89af56617a4fa
 def register_view(request):
     return render(request, 'register.html')
 def home_content(request):
     return render(request, 'quiz.html')
 def login_view(request):
     return render(request, 'login.html')
+def my_page(request):
+    return render(request, 'mypage.html')
 
 class DeleteUser(APIView):
     def delete(self,request,pk):
