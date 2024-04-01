@@ -35,6 +35,10 @@
         </div>
     </nav>
     <br>
+<<<<<<< HEAD
+=======
+    {% if records %}
+>>>>>>> 6692697f9c6d5b504832f1eceeb89af56617a4fa
     <table class="table table-striped table-hover table-bordered">
         <thead class="table-dark">
             <tr>
@@ -44,7 +48,10 @@
             </tr>
         </thead>
         <tbody>
+<<<<<<< HEAD
             {% if records %}
+=======
+>>>>>>> 6692697f9c6d5b504832f1eceeb89af56617a4fa
             {% for record in records %}
             <tr>
                 <td><a href="{% url 'user-detail' record.id  %}">{{ record.id }}</a></td>
@@ -52,8 +59,17 @@
                 <td>{{ record.name }}</td>
             </tr>
             {% endfor %}
+<<<<<<< HEAD
 
             {% endif %}
+=======
+        </tbody>
+    </table>
+    {% else %}
+    <h1>Chào mừng đến với trang chủ</h1>
+
+    {% endif %}
+>>>>>>> 6692697f9c6d5b504832f1eceeb89af56617a4fa
 
 </body>
 
