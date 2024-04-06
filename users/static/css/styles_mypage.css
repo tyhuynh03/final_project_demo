@@ -139,6 +139,31 @@ header .navigation a:hover {
     margin: 10px;
     border-radius: 5px;
 }
+.create-question-box {
+    background-color: #f0f0f0; /* Màu nền */
+    padding: 20px; /* Khoảng cách bên trong khung */
+    margin: 10px; /* Khoảng cách với phần tử phía trên */
+}
+
+.create-question-box h3 {
+    color: #333; /* Màu chữ */
+    margin-bottom: 10px; /* Khoảng cách với phần tử phía dưới */
+}
+
+.create-question-btn {
+    background-color: #007bff; /* Màu nền của nút */
+    color: #fff; /* Màu chữ của nút */
+    padding: 10px 20px; /* Kích thước của nút */
+    border: none; /* Không có đường viền */
+    border-radius: 5px; /* Bo tròn góc của nút */
+    text-decoration: none; /* Không gạch chân cho văn bản của nút */
+    display: inline-block; /* Hiển thị dạng khối */
+    transition: background-color 0.3s; /* Hiệu ứng chuyển đổi màu nền khi hover */
+}
+
+.create-question-btn:hover {
+    background-color: #0056b3; /* Màu nền của nút khi hover */
+}
 .title {
     font-weight: bold;
     color: #333;

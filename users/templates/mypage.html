@@ -17,8 +17,8 @@
         </div>
         <div class="navigation">
             <a href="#" onclick="showLibrary()">Thư viện</a>
-            <a href="#">Chủ đề</a>
-            <a href="#">Liên hệ</a>
+            <a href="{% url 'question_list' %}">Chủ đề</a> 
+            <a href="{% url 'info_page' %}">Liên hệ</a>
             <a href="{% url 'user' %}">Tài khoản</a>
             <div id="libraryItems" class="library-items">
                 <a href="#">Lớp</a>
@@ -32,26 +32,33 @@
     </div>
     <div class="container">
         <div class="box">
-            <div class="title">Chủ đề 1</div>
+            <div class="title">
+                <a href="{% url 'question_list' %}">Chủ đề 1</a>
+            </div>
             <div class="description-box">
                 <div class="description">14 thẻ</div>
             </div>
-            
         </div>
         <div class="box">
-            <div class="title">Chủ đề 2</div>
+            <div class="title">
+                <a href="{% url 'question_list' %}">Chủ đề 2</a>
+            </div>
             <div class="description-box">
                 <div class="description">14 thẻ</div>
             </div>
-            
         </div>
         <div class="box">
-            <div class="title">Chủ đề 3</div>
+            <div class="title">
+                <a href="{% url 'question_list' %}">Chủ đề 3</a>
+            </div>
             <div class="description-box">
                 <div class="description">14 thẻ</div>
             </div>
-            
         </div>
+    </div>
+    <div class="create-question-box">
+        <h3>Tạo câu hỏi</h3>
+        <a href="{% url 'add_question' %}" class="create-question-btn">Tạo mới</a>
     </div>
     <div class="content-6">
         <div class="content-item">

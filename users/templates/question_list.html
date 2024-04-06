@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+    <title>Question List</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles_questionlist.css' %}">
+</head>
+
+<body>
+    <h1>Question List</h1>
+    <ul>
+        {% for question in questions %}
+        <li>
+            <a href="{% url 'question_detail' question.id %}">{{ question.text }}</a>
+            <!-- Thêm nút xóa câu hỏi -->
+            <form action="{% url 'delete_question' question.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Xóa</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    
+    <a href="{% url 'add_question' %}" class="add-question-link">Thêm câu hỏi</a>
+</body>
+
+</html>

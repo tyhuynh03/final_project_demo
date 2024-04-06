@@ -1,0 +1,22 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    color: #333;
+}
+
+h2 {
+    color: #555;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.correct-answer {
+    color: red;
+    /* Màu đỏ */
+    /* Các thuộc tính CSS khác nếu cần */
+}

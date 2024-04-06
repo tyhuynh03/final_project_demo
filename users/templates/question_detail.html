@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+    <title>Question Detail</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+
+<body>
+    <h1>Question Detail</h1>
+    <h2>{{ question.text }}</h2>
+    <ul>
+        {% for choice in question.choices.all %}
+        {% if choice.is_correct %}
+        <li class="correct-answer">{{ choice.text }}</li>
+        {% else %}
+        <li>{{ choice.text }}</li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</body>
+
+</html>
