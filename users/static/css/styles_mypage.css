@@ -11,6 +11,7 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
+    background-color: #e3e6ec;
 }
 
 header {
@@ -36,6 +37,7 @@ header .navigation {
     line-height: 80px;
     display: inline-block;
 }
+
 header .logo {
     position: relative;
     color: #222;
@@ -70,31 +72,71 @@ header .navigation a:hover {
 
 .search-bar {
     position: relative;
-    margin-right: 20px; /* Để tạo khoảng cách với phần tử tiếp theo */
+    margin-right: 20px;
+    /* Để tạo khoảng cách với phần tử tiếp theo */
 }
 
 .search-bar input[type="text"] {
-    width: 400px; /* Độ rộng của ô tìm kiếm */
-    padding: 10px; /* Khoảng cách bên trong của ô tìm kiếm */
-    border: 1px solid #ccc; /* Viền ô tìm kiếm */
-    border-radius: 20px; /* Độ cong của viền */
-    outline: none; /* Loại bỏ đường viền khi ô tìm kiếm được chọn */
-    transition: all 0.3s ease-in-out; /* Hiệu ứng chuyển đổi mượt mà */
+    width: 400px;
+    /* Độ rộng của ô tìm kiếm */
+    padding: 10px;
+    /* Khoảng cách bên trong của ô tìm kiếm */
+    border: 1px solid #ccc;
+    /* Viền ô tìm kiếm */
+    border-radius: 20px;
+    /* Độ cong của viền */
+    outline: none;
+    /* Loại bỏ đường viền khi ô tìm kiếm được chọn */
+    transition: all 0.3s ease-in-out;
+    /* Hiệu ứng chuyển đổi mượt mà */
+}
+
+.search-bar {
+    position: relative;
+}
+
+.search-bar input[type="text"] {
+    padding-right: 30px;
+    /* Đảm bảo khoảng cách đủ để hiển thị icon search */
+}
+
+.search-bar i {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    /* Điều chỉnh vị trí của icon search */
+    transform: translateY(-50%);
+}
+
+::placeholder {
+    font-weight: 600;
+    font-size: 1rem;
+    /* -webkit-letter-spacing: normal;
+    -moz-letter-spacing: normal;
+    -ms-letter-spacing: normal;
+    letter-spacing: normal; */
+    line-height: 1.5;
 }
 
 .search-bar input[type="text"]:focus {
-    border-color: #007bff; /* Màu viền khi ô tìm kiếm được chọn */
-    box-shadow: 0 0 5px #007bff; /* Hiệu ứng bóng đổ khi ô tìm kiếm được chọn */
+    border-color: #007bff;
+    /* Màu viền khi ô tìm kiếm được chọn */
+    box-shadow: 0 0 5px #007bff;
+    /* Hiệu ứng bóng đổ khi ô tìm kiếm được chọn */
 }
 
 .search-bar input[type="text"]::placeholder {
-    color: #999; /* Màu chữ gợi ý */
-    font-style: italic; /* Font chữ nghiêng cho chữ gợi ý */
+    color: #999;
+    /* Màu chữ gợi ý */
+    font-style: italic;
+    /* Font chữ nghiêng cho chữ gợi ý */
 }
+
 .library-items {
     display: none;
     position: absolute;
-    top: 60px; /* Điều chỉnh vị trí xuất phát từ top của thanh navigation */
+    top: 60px;
+    /* Điều chỉnh vị trí xuất phát từ top của thanh navigation */
     left: 0;
     background-color: #fff;
     border: 1px solid #ccc;
@@ -104,7 +146,8 @@ header .navigation a:hover {
 }
 
 .navigation {
-    position: relative; /* Cần thiết cho việc định vị tuyệt đối của phần libraryItems */
+    position: relative;
+    /* Cần thiết cho việc định vị tuyệt đối của phần libraryItems */
 }
 
 .library-items a {
@@ -118,52 +161,105 @@ header .navigation a:hover {
 .library-items a:hover {
     background-color: #f0f0f0;
 }
+
 .content h1 {
     margin-top: 100px;
     padding: 0px 0px 0px 10px;
-    font-size: 24px; /* Kích thước font */
-    font-weight: bold; /* Độ đậm */
-    color: #333; /* Màu chữ */
-    margin-bottom: 5px; /* Khoảng cách dưới */
+    font-size: 24px;
+    /* Kích thước font */
+    font-weight: bold;
+    /* Độ đậm */
+    color: #333;
+    /* Màu chữ */
+    margin-bottom: 5px;
+    /* Khoảng cách dưới */
     flex-direction: column;
 }
+
 .container {
+    margin-top: 20px;
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-left: 150px;
 }
 
 .box {
-    flex: 1;
     background-color: #f0f0f0;
-    padding: 20px;
-    margin: 10px;
-    border-radius: 5px;
+    padding: 16px;
+    margin: 20px;
+    border-radius: 10px;
+    width: 366px;
+    height: 170px;
+    display: flex;
+    flex-direction: column;
 }
+
+.box .title a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 550;
+    letter-spacing: normal;
+    font-size: 1rem;
+    line-height: 1.5;
+    font: inherit;
+}
+
+.box .title {
+    margin-bottom: 30px;
+}
+
+.box .title a:hover {
+    color: #4255ff;
+}
+
+.box .SetPreviewCard-creator {
+    margin-right: .5rem;
+    font-weight: 600;
+    font-size: .875rem;
+    line-height: 1.285714285714286;
+    margin-top: auto;
+}
+
 .create-question-box {
-    background-color: #f0f0f0; /* Màu nền */
-    padding: 20px; /* Khoảng cách bên trong khung */
-    margin: 10px; /* Khoảng cách với phần tử phía trên */
+    background-color: #f0f0f0;
+    /* Màu nền */
+    padding: 20px;
+    /* Khoảng cách bên trong khung */
+    margin: 10px;
+    /* Khoảng cách với phần tử phía trên */
 }
 
 .create-question-box h3 {
-    color: #333; /* Màu chữ */
-    margin-bottom: 10px; /* Khoảng cách với phần tử phía dưới */
+    color: #333;
+    /* Màu chữ */
+    margin-bottom: 10px;
+    /* Khoảng cách với phần tử phía dưới */
 }
 
 .create-question-btn {
-    background-color: #007bff; /* Màu nền của nút */
-    color: #fff; /* Màu chữ của nút */
-    padding: 10px 20px; /* Kích thước của nút */
-    border: none; /* Không có đường viền */
-    border-radius: 5px; /* Bo tròn góc của nút */
-    text-decoration: none; /* Không gạch chân cho văn bản của nút */
-    display: inline-block; /* Hiển thị dạng khối */
-    transition: background-color 0.3s; /* Hiệu ứng chuyển đổi màu nền khi hover */
+    background-color: #007bff;
+    /* Màu nền của nút */
+    color: #fff;
+    /* Màu chữ của nút */
+    padding: 10px 20px;
+    /* Kích thước của nút */
+    border: none;
+    /* Không có đường viền */
+    border-radius: 5px;
+    /* Bo tròn góc của nút */
+    text-decoration: none;
+    /* Không gạch chân cho văn bản của nút */
+    display: inline-block;
+    /* Hiển thị dạng khối */
+    transition: background-color 0.3s;
+    /* Hiệu ứng chuyển đổi màu nền khi hover */
 }
 
 .create-question-btn:hover {
-    background-color: #0056b3; /* Màu nền của nút khi hover */
+    background-color: #0056b3;
+    /* Màu nền của nút khi hover */
 }
+
 .title {
     font-weight: bold;
     color: #333;
@@ -172,13 +268,32 @@ header .navigation a:hover {
 
 .description {
     color: #666;
+    display: inline-block;
+    background-color: #edefff;
 }
 
 .description-box {
-    background-color: #aaf; /* Màu xanh */
-    padding: 10px; /* Padding để tạo khoảng trống xung quanh văn bản */
-    border-radius: 5px; /* Bo tròn góc của khung */
-    display: inline-block; /* Đảm bảo khung chỉ có đủ kích thước cần thiết */
+
+    /* Màu xanh */
+    padding: 10px;
+    /* Padding để tạo khoảng trống xung quanh văn bản */
+    border-radius: 5px;
+    /* Bo tròn góc của khung */
+    display: inline-block;
+    /* Đảm bảo khung chỉ có đủ kích thước cần thiết */
+
+}
+
+.description-box span {
+    font-weight: 600;
+    font-size: .75rem;
+    -webkit-letter-spacing: normal;
+    -moz-letter-spacing: normal;
+    -ms-letter-spacing: normal;
+    letter-spacing: normal;
+    line-height: 1.3333333333333333;
+    display: inline-block;
+    padding: .125rem 0;
 }
 
 .content-6 {
@@ -223,6 +338,7 @@ header .navigation a:hover {
 .content-6 .content-item a:hover {
     color: #4255ff;
 }
+
 .media-icons {
     position: relative;
     display: flex;

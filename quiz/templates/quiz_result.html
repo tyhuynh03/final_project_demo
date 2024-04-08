@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Result</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{% static 'css/styles_result.css' %}">
+    <style>
+        #myPieChart {
+            width: 250px;
+            /* Đặt chiều rộng */
+            height: 250px;
+            /* Đặt chiều cao */
+            margin: 0 auto;
+            /* Canh giữa biểu đồ */
+
+        }
+
+        .correct {
+            background-color: lightgreen;
+        }
+
+        .incorrect {
+            background-color: lightcoral;
+        }
+
+        .selected {
+            background-color: #f8f9fa;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>Quiz Result</h1>
+    <p>{{ correct_answers }} out of {{ total_questions }} questions correct</p>
+    <canvas id="myPieChart"></canvas>
+    <form action="#">
+        {% for user_answer in user_answers %}
+        <div class="question-card" data-question="{{ forloop.counter }}">
+            <div class="question">
+                <h2>{{ forloop.counter }}. {{ user_answer.question.text }}</h2>
+                <div class="choices">
+                    {% for choice in user_answer.question.choices.all %}
+                    <div class="choice {% if choice.is_correct  %} correct 
+                    {% elif choice.is_correct == 0 and choice.id == user_answer.selected_choice_id %} incorrect 
+                    {%endif%}">
+
+                        <input type="radio" id="choice{{ choice.id }}" name="question{{ question.id }}"
+                            value="{{ choice.id }}">
+                        <label for="choice{{ choice.id }}">{{ choice.text }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </form>
+    </div>
+</body>
+
+<script>
+    var correctAnswers = '{{ correct_answers }}';
+    var totalQuestions = '{{ total_questions }}';
+    var incorrectAnswers = totalQuestions - correctAnswers;
+
+    var ctx = document.getElementById('myPieChart').getContext('2d');
+    var myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Correct', 'Incorrect'],
+            datasets: [{
+                data: [correctAnswers, incorrectAnswers],
+                backgroundColor: [
+                    'rgb(75, 192, 192)',
+                    'rgb(255, 99, 132)'
+                ],
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            animation: {
+                animateRotate: true,
+                animateScale: true
+            }
+        }
+    });
+
+</script>
+
+</html>

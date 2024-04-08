@@ -1,0 +1,165 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    flex-direction: column;
+
+}
+
+h1 {
+    color: #007bff;
+    text-align: left;
+}
+
+.question-container {
+    margin-top: 100px;
+    position: relative;
+    flex: 1;
+    width: 60%;
+    /* overflow: ; */
+    max-height: none;
+    height: auto;
+}
+
+.question-card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+    width: 700px;
+    box-shadow: #333;
+
+
+}
+
+.question {
+    margin-bottom: 10px;
+}
+
+.choices {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.choice {
+    position: relative;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+
+.choice:hover:not(.selected) {
+    background-color: #f0f0f0;
+}
+
+.circle {
+    margin-right: 10px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 1px solid #333;
+    background-color: transparent;
+}
+
+.selected .circle {
+    background-color: #333;
+}
+
+.question-image-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: calc(30px);
+}
+
+.question-image {
+    max-width: 80%;
+    max-height: 300px;
+    max-width: 600px;
+    border-radius: 10px;
+}
+
+#submit-button {
+    position: relative;
+    bottom: 20px;
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 50px;
+}
+
+#submit-button:hover {
+    background-color: #2980b9;
+}
+
+#progress-bar {
+    margin-top: 20px;
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    top: 0;
+    position: fixed;
+    z-index: 999;
+
+}
+
+#progress-bar span {
+    font-weight: bold;
+}
+
+#timer {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 100px;
+}
+
+#time-left {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+/* CSS cho bảng trạng thái câu hỏi */
+#question-status {
+    position: fixed;
+    top: 150px;
+    left: 20px;
+    background-color: rgb(151, 144, 169);
+    padding: 25px;
+    border-radius: 10px;
+}
+
+#question-status ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#question-status li {
+    margin-bottom: 5px;
+    cursor: pointer;
+    padding: 5px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+#question-status li.completed {
+    /* Màu chữ xanh lá cho các câu đã làm */
+    color: #007bff;
+}
+
+.choice label {
+    cursor: pointer;
+    width: 300px;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+}

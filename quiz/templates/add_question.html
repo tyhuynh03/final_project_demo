@@ -1,0 +1,39 @@
+<!-- add_question.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Question</title>
+</head>
+
+<body>
+    <h1>Add Question</h1>
+    <!-- <form method="post" action="{% url 'import_questions_csv' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- {{ question_form.as_p }}
+        {{ choice_formset.management_form }}
+        {% for form in choice_formset.forms %}
+        {{ form.as_p }}
+        {% endfor %}
+    <input type="file" name="question_file">
+    <button type="submit">Add Question</button>
+    </form> -->
+    <form method="post">
+        {% csrf_token %}
+        {{ question_form.as_p }}
+
+        <!-- Hiển thị form cho các câu trả lời -->
+        <fieldset>
+            <legend>Choices:</legend>
+            {{ choice_formset.management_form }}
+            {{ choice_formset.non_form_errors }}
+            {% for choice_form in choice_formset %}
+            {{ choice_form.as_p }}
+            {% endfor %}
+        </fieldset>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+
+</html>

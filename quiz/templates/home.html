@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .box {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 10px;
+            padding: 10px;
+            width: 200px;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+        
+        }
+
+        .description-box {
+            margin-top: 5px;
+        }
+
+        .description {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .box {
+            flex: 1;
+            background-color: #f0f0f0;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        .title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #666;
+        }
+
+        .description-box {
+            background-color: #aaf;
+            /* Màu xanh */
+            padding: 10px;
+            /* Padding để tạo khoảng trống xung quanh văn bản */
+            border-radius: 5px;
+            /* Bo tròn góc của khung */
+            display: inline-block;
+            /* Đảm bảo khung chỉ có đủ kích thước cần thiết */
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Choose a topic to start quiz:</h1>
+    <div class="container">
+        {% for topic in topics %}
+        <div class="box">
+            <div class="title"><a href="{% url 'start_quiz' topic.id %}">{{ topic.name }}</a></div>
+            {% if topic.question_count %}
+            <div class="description-box">
+                <div class="description"><span>({{ topic.question_count }} questions)</span></div>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+
+</body>
+
+</html>

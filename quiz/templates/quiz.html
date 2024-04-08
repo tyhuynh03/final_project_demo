@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <title>Kiểm tra kiến thức đã học</title>
+    <link rel="stylesheet" href="{% static  'css/styles.css' %}">
+</head>
+
+<body>
+
+    <div id="progress-bar">
+        <span id="progress-text">Số câu đã làm 0 / {{ questions|length }}</span>
+    </div>
+    <div id="timer"></div>
+    <div id="time-left"></div>
+
+    <div id="question-status">
+        <ul></ul>
+    </div>
+
+    <form id="quiz-form" method="post" action="{% url 'submit_quiz' %}">
+        {% csrf_token %}
+        {% for question in questions %}
+        <div class="question-card" data-question="{{ forloop.counter }}">
+            <div class="question">
+                <h2>{{ forloop.counter }}. {{ question.text }}</h2>
+                <div class="question-image-container">
+                    <img class="question-image" alt="Ảnh minh họa" src="" />
+                </div>
+                <div class="choices">
+                    {% for choice in question.choices.all %}
+                    <div class="choice" data-question="{{ forloop.parentloop.counter }}"
+                        data-choice="{{ forloop.counter }} ">
+
+                        <input type="radio" id="choice{{ choice.id }}" name="question{{ question.id }}"
+                            value="{{ choice.id }}">
+                        <label for="choice{{ choice.id }}">{{ choice.text }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <input type="hidden" id="total-questions" name="total_questions" value="{{ questions|length }}">
+        <input type="hidden" name="topic_id" value="{{topic.id}}">
+        <button id="submit-button" type="submit">Gửi bài kiểm tra</button>
+    </form>
+    </div>
+
+
+    <div id="result-container" style="display: none"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var questions = document.querySelectorAll('.question-card');
+            var submitted = false;
+            var correctAnswers = 0;
+            var totalQuestions = '{{ questions| length }}';
+
+
+            var score = 0;
+            var timerDisplay = document.getElementById("timer");
+            var timeLeftDisplay = document.getElementById("time-left");
+            var timerSeconds = totalQuestions * 60;
+            var timerInterval;
+
+            function updateProgress() {
+                var selectedChoices = document.querySelectorAll(".selected");
+                var progressText = document.getElementById("progress-text");
+                progressText.textContent =
+                    "Số câu đã làm " +
+                    selectedChoices.length +
+                    "/" +
+                    totalQuestions;
+            }
+
+            function searchAndSetImage(questionElement) {
+                var PIXABAY_API_KEY = '26083203-47b9c5301cbb2e7ff55fe3990';
+                var PIXABAY_API_URL = 'https://pixabay.com/api/?key=' + PIXABAY_API_KEY + '&image_type=photo';
+
+                fetch(PIXABAY_API_URL)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.hits.length > 0) {
+                            var imageUrl = data.hits[Math.floor(Math.random() * data.hits.length)].webformatURL;
+                            var questionImage = questionElement.querySelector('.question-image');
+                            questionImage.src = imageUrl;
+                            if (questionImage.clientHeight > questionImage.clientWidth) {
+                                questionImage.style.width = 'auto';
+                                questionImage.style.height = '100%';
+                            } else {
+                                questionImage.style.width = '100%';
+                                questionImage.style.height = 'auto';
+                            }
+                        }
+                    })
+                    .catch(error => console.error('Error fetching images from Pixabay:', error));
+            }
+
+            questions.forEach(function (question) {
+                searchAndSetImage(question);
+
+                var choices = question.querySelectorAll(".choice");
+                choices.forEach(function (choice) {
+                    choice.addEventListener("click", function () {
+                        if (!submitted) {
+                            var questionNumber = choice.dataset.question;
+                            var selectedChoices = document.querySelectorAll('.choice[data-question="' + questionNumber + '"].selected');
+                            selectedChoices.forEach(function (selectedChoice) {
+                                selectedChoice.classList.remove("selected");
+                            });
+
+                            choice.classList.add("selected");
+                            updateProgress();
+                            updateQuestionStatus(); // Cập nhật trạng thái câu hỏi khi có lựa chọn mới
+                        }
+                    });
+
+                    choice.addEventListener("mouseenter", function () {
+                        if (!submitted && !choice.classList.contains("selected")) {
+                            choice.style.backgroundColor = "#f0f0f0";
+                        }
+                    });
+
+                    choice.addEventListener("mouseleave", function () {
+                        if (!submitted && !choice.classList.contains("selected")) {
+                            choice.style.backgroundColor = "";
+                        }
+                    });
+                });
+            });
+
+            document.getElementById("submit-button").addEventListener("click", function () {
+                if (!submitted) {
+                    submitted = true;
+                    clearInterval(timerInterval);
+                    var quizForm = document.getElementById("quiz-form");
+                    var selectedChoices = quizForm.querySelectorAll(".selected");
+                    var selectedChoiceData = [];
+                    selectedChoices.forEach(function (selectedChoice) {
+                        var questionNumber = selectedChoice.dataset.question;
+                        var choiceNumber = selectedChoice.dataset.choice; // Thêm dòng này để lấy giá trị của data-choice
+                        var questionElement = document.querySelector('.question-card[data-question="' + questionNumber + '"]');
+                        var correctChoice = questionElement.querySelector('.choice[data-choice="1"]');
+
+                        if (selectedChoice === correctChoice) {
+                            correctAnswers++;
+                        }
+                        selectedChoiceData.push({ question: questionNumber, choice: choiceNumber });
+                    });
+                    document.getElementById("correct-answers").value = correctAnswers;
+                    document.getElementById("incorrect-answers").value = incorrectAnswers;
+                    document.getElementById("selected-choices").value = JSON.stringify(selectedChoiceData);
+
+
+                }
+            });
+
+
+            function startTimer() {
+                timerInterval = setInterval(function () {
+                    timerSeconds--;
+                    var minutes = Math.floor(timerSeconds / 60);
+                    var seconds = timerSeconds % 60;
+                    timerDisplay.textContent = "Thời gian còn lại: " + minutes + " phút " + seconds + " giây";
+
+                    if (timerSeconds <= 0) {
+                        clearInterval(timerInterval);
+                        timerDisplay.textContent = "Hết thời gian";
+                        document.getElementById("submit-button").click();
+                    }
+                }, 1000);
+            }
+
+            startTimer();
+
+            // Bảng trạng thái câu hỏi
+            var questionStatusContainer = document.getElementById("question-status").querySelector("ul");
+
+            questions.forEach(function (question, index) {
+                var questionNumber = index + 1;
+                var listItem = document.createElement("li");
+                listItem.textContent = "Câu " + questionNumber;
+                listItem.setAttribute("data-question", questionNumber);
+                questionStatusContainer.appendChild(listItem);
+
+                listItem.addEventListener("click", function () {
+                    var questionIndex = parseInt(listItem.getAttribute("data-question")) - 1;
+                    questions[questionIndex].scrollIntoView({ behavior: "smooth", block: "center" });
+                });
+            });
+
+            function updateQuestionStatus() {
+                questions.forEach(function (question, index) {
+                    var questionNumber = index + 1;
+                    var listItem = questionStatusContainer.querySelector('li[data-question="' + questionNumber + '"]');
+                    var selectedChoice = question.querySelector(".selected");
+
+                    if (selectedChoice) {
+                        listItem.style.color = "#fff"; // Chuyển màu chữ thành xanh lá khi câu hỏi đã được làm
+                        listItem.style.backgroundColor = "#333"; // Chuyển màu nền thành xanh lá khi câu hỏi đã được làm
+                    }
+                });
+            }
+            updateQuestionStatus(); // Cập nhật trạng thái ban đầu
+        });
+
+        // thêm tính năng chọn đáp án câu 1 thì chuyển sang câu 2
+        // Lấy danh sách các lựa chọn từ mỗi câu hỏi
+        var choices = document.querySelectorAll('.choices .choice');
+
+        choices.forEach(function (choice) {
+            choice.addEventListener('click', function () {
+                // Kiểm tra xem người dùng đã chọn một đáp án chưa
+                // Cuộn xuống câu hỏi tiếp theo
+                var nextQuestionNumber = parseInt(choice.dataset.question) + 1;
+                var nextQuestion = document.querySelector('.question-card[data-question="' + nextQuestionNumber + '"]');
+                if (nextQuestion) {
+                    nextQuestion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+
+            });
+        });
+
+
+
+
+
+    </script>
+</body>
+
+</html>

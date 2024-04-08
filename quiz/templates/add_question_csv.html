@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add question csv</title>
+</head>
+
+<body>
+    <h1>Add Question</h1>
+    <form method="post" action="{% url 'import_questions_csv'  %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="question_file">
+        <button type="submit">Add Question</button>
+    </form>
+</body>
+
+</html>
