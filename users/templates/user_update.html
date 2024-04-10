@@ -1,0 +1,9 @@
+<!-- Trong file user_update.html -->
+<form action="{% url 'user_update' user_data.id %}" method="POST">
+    {% csrf_token %}
+    <!-- Thêm các trường cho việc cập nhật thông tin -->
+    <input type="text" name="username" value="{{ user_data.username }}">
+    <input type="email" name="email" value="{{ user_data.email }}">
+    <!-- Thêm các trường khác nếu cần -->
+    <button type="submit" class="btn btn-success">Update</button>
+</form>
