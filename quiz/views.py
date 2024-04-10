@@ -125,3 +125,4 @@ def submit_quiz(request):
         return render(request, 'quiz_result.html', {'correct_answers': correct_answers, 'total_questions': total_questions, 'questions':topic_questions, 'user_answers':user_answers})
     else:
         return HttpResponseRedirect('/')
+    

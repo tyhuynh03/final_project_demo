@@ -12,10 +12,11 @@
     <div id="progress-bar">
         <span id="progress-text">Số câu đã làm 0 / {{ questions|length }}</span>
     </div>
-    <div id="timer"></div>
+
     <div id="time-left"></div>
 
     <div id="question-status">
+        <div id="timer"></div>
         <ul></ul>
     </div>
 
@@ -164,7 +165,7 @@
                     timerSeconds--;
                     var minutes = Math.floor(timerSeconds / 60);
                     var seconds = timerSeconds % 60;
-                    timerDisplay.textContent = "Thời gian còn lại: " + minutes + " phút " + seconds + " giây";
+                    timerDisplay.textContent = "Thời gian còn lại :  " + minutes + " phút " + seconds + " giây";
 
                     if (timerSeconds <= 0) {
                         clearInterval(timerInterval);
@@ -182,7 +183,7 @@
             questions.forEach(function (question, index) {
                 var questionNumber = index + 1;
                 var listItem = document.createElement("li");
-                listItem.textContent = "Câu " + questionNumber;
+                listItem.textContent = + questionNumber;
                 listItem.setAttribute("data-question", questionNumber);
                 questionStatusContainer.appendChild(listItem);
 
@@ -200,7 +201,7 @@
 
                     if (selectedChoice) {
                         listItem.style.color = "#fff"; // Chuyển màu chữ thành xanh lá khi câu hỏi đã được làm
-                        listItem.style.backgroundColor = "#333"; // Chuyển màu nền thành xanh lá khi câu hỏi đã được làm
+                        listItem.style.backgroundColor = "#007bff"; // Chuyển màu nền thành xanh lá khi câu hỏi đã được làm
                     }
                 });
             }

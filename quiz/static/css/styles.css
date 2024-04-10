@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400:500;600;700;800;900;&display=swap");
+
 body {
     display: flex;
     justify-content: center;
@@ -119,7 +121,7 @@ h1 {
 #timer {
     font-size: 20px;
     font-weight: bold;
-    margin-top: 100px;
+    margin-bottom: 10px;
 }
 
 #time-left {
@@ -129,26 +131,37 @@ h1 {
 
 /* CSS cho bảng trạng thái câu hỏi */
 #question-status {
+    width: 170px;
     position: fixed;
     top: 150px;
     left: 20px;
-    background-color: rgb(151, 144, 169);
+    background-color: rgb(249, 249, 249);
     padding: 25px;
-    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+
 }
 
 #question-status ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
 }
 
 #question-status li {
+    text-align: center;
+    width: 24px;
     margin-bottom: 5px;
     cursor: pointer;
     padding: 5px;
     background-color: #f0f0f0;
     border-radius: 5px;
+    box-shadow: 0 0 5px rgba(4, 4, 4, 0.941);
+    border: 1px solid black;
+    margin-right: 5px;
 }
 
 #question-status li.completed {
