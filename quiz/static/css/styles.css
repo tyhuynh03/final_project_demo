@@ -131,7 +131,7 @@ h1 {
 
 /* CSS cho bảng trạng thái câu hỏi */
 #question-status {
-    width: 170px;
+    width: 230px;
     position: fixed;
     top: 150px;
     left: 20px;
@@ -139,7 +139,10 @@ h1 {
     padding: 25px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border: 1px solid #ccc;
+}
 
+#submit-quiz-button {
+    margin-top: 10px;
 }
 
 #question-status ul {
@@ -149,11 +152,13 @@ h1 {
     display: flex;
     justify-content: left;
     flex-wrap: wrap;
+
 }
 
 #question-status li {
     text-align: center;
-    width: 24px;
+    width: 37px;
+    height: 35px;
     margin-bottom: 5px;
     cursor: pointer;
     padding: 5px;
