@@ -120,6 +120,7 @@ def submit_quiz(request):
                 selected_choice = Choice.objects.get(pk=selected_choice_id)
                 if selected_choice.is_correct:
                     correct_answers += 1
+            
             user_answers.append({'question': question, 'selected_choice_id': selected_choice_id})
             
         return render(request, 'quiz_result.html', {'correct_answers': correct_answers, 'total_questions': total_questions, 'questions':topic_questions, 'user_answers':user_answers})

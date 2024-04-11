@@ -10,5 +10,5 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('start-quiz/<int:topic_id>/', views.start_quiz, name='start_quiz'),
     path("add_question_csv/",views.add_question_csv,name="add_question_csv"),
-    path("submit_quiz/",views.submit_quiz,name="submit_quiz")
+    path("submit_quiz/",views.submit_quiz,name="submit_quiz"),
 ]   

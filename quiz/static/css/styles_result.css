@@ -6,7 +6,10 @@ body {
     align-items: center;
     margin: 0;
     flex-direction: column;
+}
 
+form {
+    margin-top: 20px;
 }
 
 h1 {
@@ -121,7 +124,7 @@ h1 {
 #timer {
     font-size: 20px;
     font-weight: bold;
-    
+
 }
 
 #time-left {
@@ -130,14 +133,7 @@ h1 {
 }
 
 /* CSS cho bảng trạng thái câu hỏi */
-#question-status {
-    position: fixed;
-    top: 150px;
-    left: 20px;
-    background-color: rgb(151, 144, 169);
-    padding: 25px;
-    border-radius: 10px;
-}
+
 
 #question-status ul {
     list-style-type: none;
@@ -149,7 +145,6 @@ h1 {
     margin-bottom: 5px;
     cursor: pointer;
     padding: 5px;
-    background-color: #f0f0f0;
     border-radius: 5px;
 }
 
@@ -164,4 +159,78 @@ h1 {
     text-align: center;
     height: 50px;
     line-height: 50px;
+}
+
+#question-status {
+    width: 200px;
+    position: fixed;
+    top: 150px;
+    left: 20px;
+    background-color: rgb(249, 249, 249);
+    padding: 25px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+}
+
+
+
+
+#submit-quiz-button {
+    margin-top: 10px;
+}
+
+#question-status ul {
+
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    margin-left: 15px;
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+
+}
+
+p {
+    font-size: 20px;
+    font-weight: bold;
+    color: #007bff;
+
+}
+
+
+#question-status li {
+    text-align: center;
+    width: 25px;
+    height: 25px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(4, 4, 4, 0.941);
+    border: 1px solid black;
+    margin-right: 5px;
+
+}
+
+#myPieChart {
+    width: 250px;
+    /* Đặt chiều rộng */
+    height: 250px;
+    /* Đặt chiều cao */
+    margin: 0 auto;
+    /* Canh giữa biểu đồ */
+
+}
+
+.correct {
+    background-color: lightgreen;
+}
+
+.incorrect {
+    background-color: lightcoral;
+}
+
+.selected {
+    background-color: #f8f9fa;
 }
