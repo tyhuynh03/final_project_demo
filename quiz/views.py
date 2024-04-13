@@ -29,7 +29,8 @@ def add_question(request):
     else:
         question_form = QuestionForm()
         choice_formset = ChoiceFormSet()
-    return render(request, 'add_question.html', {'question_form': question_form, 'choice_formset': choice_formset})
+        topic = Topic.objects.all()
+    return render(request, 'add_question.html', {'question_form': question_form, 'choice_formset': choice_formset, 'topics': topic})
 
 
 

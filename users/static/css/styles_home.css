@@ -20,7 +20,6 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    background: url("https://kfo.edu.vn/wp-content/uploads/2023/03/hoc-bong-ban-phan-la-gi-1.jpg") no-repeat;
     background-position: right center top;
     background-size: cover;
 }
@@ -56,7 +55,7 @@ header .navigation {
 
 header .logo {
     position: relative;
-    color: #222;
+    color: #226a80;
     font-size: 30px;
     text-decoration: none;
     text-transform: uppercase;
@@ -73,15 +72,14 @@ header .navigation a {
     transition-property: background;
     height: 80px; */
     text-decoration: none;
-    font-weight: bold;
-    font-weight: 500;
+
+    font-weight: 545;
     letter-spacing: 1px;
     text-transform: uppercase;
     font-size: 15px;
     color: #222;
     padding: 0 10px;
     display: inline-block;
-    font-weight: 545;
 }
 
 header .navigation a:not(:last-child) {

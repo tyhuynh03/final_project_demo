@@ -6,3 +6,7 @@ function showLibrary() {
         libraryItems.style.display = "none";
     }
 }
+function logout() {
+    var form = document.getElementById('logout-form');
+    form.submit();
+}

@@ -26,3 +26,10 @@ form .btn-danger {
 tr th:nth-child(5) {
     text-align: justify;
 }
+
+.alert-error {
+    --bs-alert-color: #58151c;
+    --bs-alert-bg: #f8d7da;
+    --bs-alert-border-color: #f1aeb5;
+    --bs-alert-link-color: #58151c;
+}

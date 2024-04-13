@@ -1,37 +1,59 @@
-<!-- add_question.html -->
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>Add Question</title>
+    <script>
+        // JavaScript để thêm các câu hỏi và câu trả lời khi nhấn nút "Add Question"
+        document.addEventListener('DOMContentLoaded', function () {
+            const addQuestionButton = document.getElementById('add-question-btn');
+            const formContainer = document.getElementById('form-container');
+
+            let questionCount = 0;
+
+            addQuestionButton.addEventListener('click', function () {
+                questionCount++;
+
+                // Tạo form cho câu hỏi và các câu trả lời
+                const questionForm = document.createElement('div');
+                questionForm.innerHTML = `
+                    <fieldset>
+                        <legend>Question ${questionCount}:</legend>
+                        <input type="text" name="question_text_${questionCount}" placeholder="Enter question text">
+                        <select name="topic_${questionCount}">
+                            {% for topic in topics %}
+                                <option value="{{ topic.id }}">{{ topic.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <input type="radio" name="correct_choice_${questionCount}" value="1">
+                        <label>Correct</label>
+                        <input type="text" name="choice_text_${questionCount}_1" placeholder="Enter choice text">
+                        <input type="radio" name="correct_choice_${questionCount}" value="2">
+                        <label>Correct</label>
+                        <input type="text" name="choice_text_${questionCount}_2" placeholder="Enter choice text">
+                        <input type="radio" name="correct_choice_${questionCount}" value="3">
+                        <label>Correct</label>
+                        <input type="text" name="choice_text_${questionCount}_3" placeholder="Enter choice text">
+                        <input type="radio" name="correct_choice_${questionCount}" value="4">
+                        <label>Correct</label>
+                        <input type="text" name="choice_text_${questionCount}_4" placeholder="Enter choice text">
+                    </fieldset>
+                `;
+
+                formContainer.appendChild(questionForm);
+            });
+        });
+    </script>
 </head>
 
 <body>
     <h1>Add Question</h1>
-    <!-- <form method="post" action="{% url 'import_questions_csv' %}" enctype="multipart/form-data">
-        {% csrf_token %}
-        <!-- {{ question_form.as_p }}
-        {{ choice_formset.management_form }}
-        {% for form in choice_formset.forms %}
-        {{ form.as_p }}
-        {% endfor %}
-    <input type="file" name="question_file">
-    <button type="submit">Add Question</button>
-    </form> -->
     <form method="post">
         {% csrf_token %}
-        {{ question_form.as_p }}
-
-        <!-- Hiển thị form cho các câu trả lời -->
-        <fieldset>
-            <legend>Choices:</legend>
-            {{ choice_formset.management_form }}
-            {{ choice_formset.non_form_errors }}
-            {% for choice_form in choice_formset %}
-            {{ choice_form.as_p }}
-            {% endfor %}
-        </fieldset>
-
+        <div id="form-container">
+            <!-- Form cho câu hỏi và các câu trả lời sẽ được thêm vào đây -->
+        </div>
+        <button id="add-question-btn" type="button">Add Question</button>
         <button type="submit">Submit</button>
     </form>
 </body>
