@@ -50,10 +50,18 @@
     <h1>Add Question</h1>
     <form method="post">
         {% csrf_token %}
-        <div id="form-container">
-            <!-- Form cho câu hỏi và các câu trả lời sẽ được thêm vào đây -->
-        </div>
-        <button id="add-question-btn" type="button">Add Question</button>
+        {{ question_form.as_p }}
+
+        <!-- Hiển thị form cho các câu trả lời -->
+        <fieldset>
+            <legend>Choices:</legend>
+            {{ choice_formset.management_form }}
+            {{ choice_formset.non_form_errors }}
+            {% for choice_form in choice_formset %}
+            {{ choice_form.as_p }}
+            {% endfor %}
+        </fieldset>
+
         <button type="submit">Submit</button>
     </form>
 </body>
