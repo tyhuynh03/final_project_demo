@@ -1,5 +1,4 @@
 from django.shortcuts import render,redirect
-from .forms import QuestionForm, ChoiceForm
 from .forms import QuestionForm, ChoiceFormSet
 import csv
 from .models import Question, Choice
@@ -7,6 +6,14 @@ from django.http import JsonResponse
 import io
 from .models import Question, Choice,Topic
 from django.http import HttpResponseRedirect
+from .serializers import QuestionSerializer, ChoiceSerializer, TopicSerializer
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+import requests
+from django.contrib import messages
+from .forms import TopicForm
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 def question_list(request):
     questions = Question.objects.all()
@@ -68,15 +75,12 @@ def import_question_from_csv(request):
         return JsonResponse({'error': 'Invalid request'}, status=400)
 
 
-def question_test(request):
-    questions = Question.objects.all()
-    return render(request, 'question_test.html', {'questions': questions})
 def home(request):
     topics = Topic.objects.all()
     for topic in topics:
         topic.question_count = topic.questions.count()
     return render(request, 'home.html', {'topics': topics})
-
+@login_required
 def start_quiz(request, topic_id):
     topic = Topic.objects.get(pk=topic_id)
     questions = topic.questions.all()  # Truy vấn tất cả các câu hỏi liên quan đến chủ đề
@@ -105,6 +109,7 @@ def add_question_csv(request):
 #         return render(request, 'quiz_result.html', {'correct_answers': correct_answers, 'total_questions': total_questions}) 
 #     else:
 #         return HttpResponseRedirect('/')
+@login_required
 def submit_quiz(request):
     if request.method == 'POST':
         data = request.POST
@@ -128,3 +133,109 @@ def submit_quiz(request):
     else:
         return HttpResponseRedirect('/')
     
+
+# quản lý câu hỏi
+class QuestionListView(APIView):
+    def get(self, request):
+        questions = Question.objects.all()
+        serializer = QuestionSerializer(questions, many =True)
+        return Response(serializer.data)
+def question_manage(request):
+    response = requests.get(f'http://127.0.0.1:8000/questions')
+    questions_data = response.json()
+     # Truy vấn tất cả các chủ đề từ cơ sở dữ liệu
+    topics = Topic.objects.all()
+
+    # Tạo một từ điển để ánh xạ id của chủ đề vào tên của chúng
+    topic_dict = {topic.id: topic.name for topic in topics}
+
+    # Thay thế id của chủ đề bằng tên của chúng trong dữ liệu câu hỏi
+    for question in questions_data:
+        topic_id = question['topic']
+        topic_name = topic_dict.get(topic_id, 'Unknown')
+        question['topic_name'] = topic_name
+    return render(request,'question_manage.html',{'questions_data':questions_data})
+# quản lý chủ đề
+
+@user_passes_test(lambda u: u.is_staff)
+@login_required
+def topic_manage(request):
+    response = requests.get(f'http://127.0.0.1:8000/topics')
+    topics_data = response.json()
+    # truyền dữ liệu vào template và render trang
+    return render(request, 'topic_manage.html', {'topics_data' : topics_data} )
+def topic_detail(request, pk):
+    response = TopicDetailView.as_view()(request, pk=pk)
+    
+    topic_data = response.data       
+    return render(request, 'topic_detail.html', {'topic_data': topic_data})
+
+def topic_update_view(request,topic_id):
+    if request.method == "GET":
+        response = requests.get(f'http://127.0.0.1:8000/topic/{topic_id}/')
+        if response.status_code == 200:
+            topic_data = response.json()
+            return render(request, 'topic_update.html', {'topic_data': topic_data})
+        else:
+            # Xử lý trường hợp không tìm thấy người dùng
+            messages.error(request, 'User not found')
+            return redirect('topic_manage')
+    elif request.method == 'POST':
+        # Lấy dữ liệu từ form gửi lên
+        updated_data = request.POST
+        
+        # Gửi yêu cầu Restapi để cập nhật thông tin
+        response = requests.put(f'http://127.0.0.1:8000/topic/{topic_id}/', data=updated_data)
+        if response.status_code == 200:
+            messages.success(request, 'Topic information updated successfully')
+            return redirect('topic_manage')
+        else:
+            # Xử lý trường hợp cập nhật thất bại
+            messages.error(request, 'Failed to update Topic information')
+            return redirect('topic_manage') 
+@login_required
+def add_topic(request):
+    if request.method == 'POST':
+        
+        form = TopicForm(request.POST)
+        if form.is_valid():
+            topic = form.save(commit=False)
+            topic.user = request.user
+            topic.save()
+            form.save()
+            messages.success(request, 'Topic added successfully')
+            return redirect('topic_manage')  # Chuyển hướng đến trang homeadmin    
+    else:
+        form = TopicForm()
+    return render(request, 'topic_manage.html', {'form': form})
+class DeleteTopic(APIView):
+    def delete(self, request, pk):
+        topic = Topic.objects.filter(id=pk).first()
+        if topic is None:
+            return Response({"error": "Topic not found"}, status=status.HTTP_404_NOT_FOUND)
+        topic.delete()
+        return Response({"success": "Topic deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+class TopicDetailView(APIView):
+    def get(self,request,pk):
+        topic = Topic.objects.filter(id=pk).first()
+        if topic is None:
+            return Response({"error":"Topic not found"},status=status.HTTP_404_NOT_FOUND)
+        serialize = TopicSerializer(topic)
+        return Response(serialize.data) 
+    def put(self,request,pk):
+        topic = Topic.objects.filter(id=pk).first()
+        if topic is None:
+            return Response({"error":"Topic not found"},status=status.HTTP_404_NOT_FOUND)
+        serialize = TopicSerializer(topic,data=request.data)
+        if serialize.is_valid():
+            serialize.save()
+            return Response(serialize.data)
+        return Response(serialize.errors,status=status.HTTP_400_BAD_REQUEST)
+
+class TopicListView(APIView):
+    def get(self, request):
+        topics = Topic.objects.all()
+        for topic in topics:
+            topic.question_count = topic.questions.count()
+        serializer = TopicSerializer(topics, many = True)
+        return Response(serializer.data)

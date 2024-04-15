@@ -36,10 +36,10 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active" aria-current="page" href="{% url 'my_page' %}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Dashboard</a>
+                            <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -47,10 +47,20 @@
                                 Quản lý
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a class="dropdown-item" href="#">User</a></li>
-                                <li><a class="dropdown-item" href="#">Qusetions</a></li>
-                                <li><a class="dropdown-item" href="#">Topic</a></li>
+                                <li><a class="dropdown-item" href="{% url 'home_admin' %}">User</a></li>
+                                <li><a class="dropdown-item" href="{% url 'question_manage' %}">Qusetions</a></li>
+                                <li><a class="dropdown-item" href="{% url 'topic_manage' %}">Topic</a></li>
                             </ul>
+
+                        </li>
+                        <li>
+                            <hr class="divider">
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="logout()">Đăng xuất</a>
+                            <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
+                                {% csrf_token %}
+                            </form>
                         </li>
                     </ul>
                 </div>

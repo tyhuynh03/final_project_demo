@@ -306,6 +306,10 @@ header .navigation a:hover {
     margin-right: 100px;
 }
 
+.content-6 .content-item h4 {
+    font-weight: 700;
+}
+
 .content-6 .content-item {
     padding: 0 45px;
     text-align: center;
@@ -358,4 +362,16 @@ header .navigation a:hover {
 
 .media-icons a:hover {
     transform: scale(1.5);
+}
+
+.nav-item {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.nav-item button {
+    border-radius: 50%;
+    /* Tạo nút có hình dạng tròn */
+    width: 45px;
+    height: 45px;
 }

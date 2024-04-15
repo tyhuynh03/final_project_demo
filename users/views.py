@@ -16,6 +16,7 @@ import requests
 from django.contrib.auth import login,logout
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import TemplateView
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 class Register(APIView):
     def post(self,request):
@@ -211,5 +212,7 @@ class MyPageView(LoginRequiredMixin, TemplateView):
         topics = Topic.objects.all()
         for topic in topics:
             topic.question_count = topic.questions.count()
+            topic.created_by = topic.user.username
         context['topics'] = topics
         return context
+
