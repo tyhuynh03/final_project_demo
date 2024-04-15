@@ -7,11 +7,12 @@ class TopicForm(forms.ModelForm):
         fields = ['name']
 
 class QuestionForm(forms.ModelForm):
-    topic = forms.ModelChoiceField(queryset=Topic.objects.all())
+    # topic = forms.ModelChoiceField(queryset=Topic.objects.all())
     
     class Meta:
         model = Question
-        fields = ['text', 'topic']
+        # fields = ['text', 'topic']
+        fields = ['text']
 
 class ChoiceForm(forms.ModelForm):
     class Meta:
