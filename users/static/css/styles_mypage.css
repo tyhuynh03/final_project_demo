@@ -223,7 +223,22 @@ header .navigation a:hover {
     line-height: 1.285714285714286;
     margin-top: auto;
 }
+.box-wrapper {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+.prev-btn,
+.next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
 
+<<<<<<< HEAD
 .box-wrapper {
     display: flex;
     transition: transform 0.5s ease;
@@ -250,6 +265,15 @@ header .navigation a:hover {
     /* Khoảng cách từ mép phải của container */
 }
 
+=======
+.prev-btn {
+    left: 10px; /* Khoảng cách từ mép trái của container */
+}
+
+.next-btn {
+    right: 10px; /* Khoảng cách từ mép phải của container */
+}
+>>>>>>> 6ffb5672b476ad0d0ed13b274c059e3012d1c855
 .create-question-box {
     background-color: #f0f0f0;
     /* Màu nền */

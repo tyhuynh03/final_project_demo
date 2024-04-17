@@ -26,15 +26,9 @@ def question_detail(request, question_id):
 # thêm câu hỏi bằng thủ công
 @login_required
 def add_question(request):
-    
     if request.method == 'POST':
         question_form = QuestionForm(request.POST)
         choice_formset = ChoiceFormSet(request.POST)
-        form = TopicForm(request.POST)
-        if form.is_valid():
-            topic = form.save(commit=False)
-            topic.user = request.user  # Gán người tạo chủ đề
-            topic.save()
         if question_form.is_valid() and choice_formset.is_valid():
             topic_id = request.POST.get('topic_id')
             if topic_id:
@@ -47,16 +41,28 @@ def add_question(request):
             question.save()
             choice_formset.instance = question
             choice_formset.save()
-            return redirect('my_page')  
+            return redirect('question_list')  # Điều hướng tới trang khác sau khi thêm câu hỏi và câu trả lời
     else:
         user = request.user
         question_form = QuestionForm()
         choice_formset = ChoiceFormSet()
-        topics = Topic.objects.filter(user=user)
-        form = TopicForm()
-    return render(request, 'add_question.html', {'question_form': question_form, 'choice_formset': choice_formset, 'topics': topics,'form': form})
+        topic = Topic.objects.all()
+    return render(request, 'add_question.html', {'question_form': question_form, 'choice_formset': choice_formset, 'topics': topic})
 
-
+# def add_topic(request):
+#     if request.method == 'POST':
+        
+#         form = TopicForm(request.POST)
+#         if form.is_valid():
+#             topic = form.save(commit=False)
+#             topic.user = request.user
+#             topic.save()
+#             form.save()
+#             messages.success(request, 'Topic added successfully')
+#             return redirect('topic_manage')  # Chuyển hướng đến trang homeadmin    
+#     else:
+#         form = TopicForm()
+#     return render(request, 'topic_manage.html', {'form': form})
 
 
 
@@ -225,6 +231,7 @@ def add_topic(request):
     else:
         form = TopicForm()
     return render(request, 'topic_manage.html', {'form': form})
+
 class DeleteTopic(APIView):
     def delete(self, request, pk):
         topic = Topic.objects.filter(id=pk).first()
