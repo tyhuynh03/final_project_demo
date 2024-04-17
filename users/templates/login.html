@@ -28,7 +28,11 @@
         </div>
     </nav>
     <!-- content -->
-
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+    {% endfor %}
     <h1 style="margin-left: 385px; padding: 50px 0px;">Login</h1>
     <div class="col-md-6 offset-md-3 ">
 

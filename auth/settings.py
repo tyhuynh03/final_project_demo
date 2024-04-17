@@ -28,6 +28,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,7 +42,12 @@ INSTALLED_APPS = [
     "rest_framework",
     "users",
     "quiz",
+    "django_extensions",
 ]
+
+
+
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

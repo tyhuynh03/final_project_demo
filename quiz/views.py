@@ -23,27 +23,44 @@ def question_detail(request, question_id):
     question = Question.objects.get(id=question_id)
     return render(request, 'question_detail.html', {'question': question})
 
-
+# thêm câu hỏi bằng thủ công
+@login_required
 def add_question(request):
+    
     if request.method == 'POST':
         question_form = QuestionForm(request.POST)
         choice_formset = ChoiceFormSet(request.POST)
+        form = TopicForm(request.POST)
+        if form.is_valid():
+            topic = form.save(commit=False)
+            topic.user = request.user  # Gán người tạo chủ đề
+            topic.save()
         if question_form.is_valid() and choice_formset.is_valid():
-            question = question_form.save()
+            topic_id = request.POST.get('topic_id')
+            if topic_id:
+                topic = Topic.objects.get(pk=topic_id)
+            else:
+                new_topic_name = request.POST.get('new_topic')
+                topic, created = Topic.objects.get_or_create(name=new_topic_name, user=request.user)  # Gán người tạo chủ đề khi tạo mới
+            question = question_form.save(commit=False)
+            question.topic = topic
+            question.save()
             choice_formset.instance = question
             choice_formset.save()
-            return redirect('question_list')  # Điều hướng tới trang khác sau khi thêm câu hỏi và câu trả lời
+            return redirect('my_page')  
     else:
+        user = request.user
         question_form = QuestionForm()
         choice_formset = ChoiceFormSet()
-        topic = Topic.objects.all()
-    return render(request, 'add_question.html', {'question_form': question_form, 'choice_formset': choice_formset, 'topics': topic})
+        topics = Topic.objects.filter(user=user)
+        form = TopicForm()
+    return render(request, 'add_question.html', {'question_form': question_form, 'choice_formset': choice_formset, 'topics': topics,'form': form})
 
 
 
 
 
-
+# thêm câu hỏi bằng file csv
 def import_question_from_csv(request):
     if request.method == 'POST' and 'question_file' in request.FILES:
         file = request.FILES['question_file']
@@ -235,7 +252,5 @@ class TopicDetailView(APIView):
 class TopicListView(APIView):
     def get(self, request):
         topics = Topic.objects.all()
-        for topic in topics:
-            topic.question_count = topic.questions.count()
         serializer = TopicSerializer(topics, many = True)
         return Response(serializer.data)

@@ -181,6 +181,9 @@ header .navigation a:hover {
     display: flex;
     flex-wrap: wrap;
     margin-left: 150px;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .box {
@@ -192,6 +195,7 @@ header .navigation a:hover {
     height: 170px;
     display: flex;
     flex-direction: column;
+    margin-right: 20px;
 }
 
 .box .title a {
@@ -218,6 +222,32 @@ header .navigation a:hover {
     font-size: .875rem;
     line-height: 1.285714285714286;
     margin-top: auto;
+}
+
+.box-wrapper {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.prev-btn,
+.next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.prev-btn {
+    left: 10px;
+    /* Khoảng cách từ mép trái của container */
+}
+
+.next-btn {
+    right: 10px;
+    /* Khoảng cách từ mép phải của container */
 }
 
 .create-question-box {
@@ -306,9 +336,9 @@ header .navigation a:hover {
     margin-right: 100px;
 }
 
-.content-6 .content-item h4 {
+/* .content-6 .content-item h4 {
     font-weight: 700;
-}
+} */
 
 .content-6 .content-item {
     padding: 0 45px;

@@ -12,5 +12,5 @@ import os
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "auth.settings")
-
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "populate_data_from_csv.settings")
 application = get_wsgi_application()

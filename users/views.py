@@ -25,7 +25,7 @@ class Register(APIView):
         serializer.save()
         messages.success(request, 'Account created successfully')
         # sau khi tạo tài khoản xong thì load lại trang đang ở
-        return redirect(reverse('register_view'))
+        return redirect(reverse('login_view'))
 
 
 

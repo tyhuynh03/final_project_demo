@@ -52,29 +52,28 @@
         <h1>Nội dung</h1>
     </div>
     <div class="container">
-        {% for topic in topics %}
-        <div class="box">
-            <div class="title"><a href="{% url 'start_quiz' topic.id %}">{{ topic.name }}</a></div>
-            {% if topic.question_count %}
-            <div class="description-box">
-                <div class="description"><span>({{ topic.question_count }} questions)</span></div>
+        <div class="box-wrapper">
+            {% for topic in topics %}
+            <div class="box">
+                <div class="title"><a href="{% url 'start_quiz' topic.id %}">{{ topic.name }}</a></div>
+                {% if topic.question_count %}
+                <div class="description-box">
+                    <div class="description"><span>({{ topic.question_count }} questions)</span></div>
+                </div>
+                {% endif %}
+                <div class="SetPreviewCard-creator"><span>{{ topic.created_by }}</span></div>
             </div>
-            {% endif %}
-            <div class="SetPreviewCard-creator"><span>{{ topic.created_by }}</span></div>
+            {% endfor %}
         </div>
-        {% endfor %}
+        <button class="prev-btn">&lt;</button>
+        <button class="next-btn">&gt;</button>
     </div>
     <div class="create-question-box">
         <h3>Tạo câu hỏi</h3>
         <a href="{% url 'add_question' %}" class="create-question-btn">Tạo mới</a>
+        <a href="{% url 'add_question_csv' %}" class="create-question-btn">Thêm bằng file csv</a>
     </div>
-    <div class="create-question-box">
-        <form id="add-topic-form" method="post" action="{% url 'add_topic' %}">
-            {% csrf_token %}
-            <input type="text" name="name" placeholder="Enter topic name">
-            <button type="submit" class="btn btn-primary">Add Topic</button>
-        </form>
-    </div>
+
 
     <div class="content-6">
         <div class="content-item">

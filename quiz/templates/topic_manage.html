@@ -105,6 +105,7 @@
                 <th scope="col">ID</th>
                 <th scope="col">topic_name</th>
                 <th scope="col">Số câu hỏi</th>
+                <th scope="col">Created By</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -114,6 +115,7 @@
                 <th scope="row">{{ topic.id }}</th>
                 <td>{{ topic.name }}</td>
                 <td>{{ topic.question_count}}</td>
+                <td>{{ topic.username}}</td>
                 <td style="display: flex;" class="action-container">
                     <a href="{% url 'topic_detail' topic.id %}" class="btn btn-secondary">View</a>
                     <a href="{% url 'topic_update' topic.id  %}" class="btn btn-success">Update</a>

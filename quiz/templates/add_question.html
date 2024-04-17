@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 
 <head>
@@ -52,7 +52,6 @@
         {% csrf_token %}
         {{ question_form.as_p }}
 
-        <!-- Hiển thị form cho các câu trả lời -->
         <fieldset>
             <legend>Choices:</legend>
             {{ choice_formset.management_form }}
@@ -62,6 +61,37 @@
             {% endfor %}
         </fieldset>
 
+        <button type="submit">Submit</button>
+    </form>
+</body>
+
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Question</title>
+</head>
+
+<body>
+    <h1>Add Question</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ question_form.as_p }}
+        {{ choice_formset.as_p }}
+        <label for="topic_id">Select a Topic:</label>
+        <select name="topic_id" id="topic_id">
+            <option value="">-- Choose a Topic --</option>
+            {% for topic in topics %}
+            <option value="{{ topic.id }}">{{ topic.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="new_topic">Or Add a New Topic:</label>
+        <input type="text" name="new_topic" id="new_topic">
+        <br>
         <button type="submit">Submit</button>
     </form>
 </body>
