@@ -2,7 +2,8 @@ import csv
 from users.models import User
 
 def run():
-    csv_file_path = r'.\scripts\User.csv'  # Đường dẫn tới file CSV của bạn
+    csv_file_path = "./scripts/User.csv" 
+  # Đường dẫn tới file CSV của bạn
 
     with open(csv_file_path, 'r', encoding='utf-8') as file:
         reader = csv.reader(file)
@@ -16,6 +17,7 @@ def run():
             user = User.objects.create_user(username=username, email=email, password=password)
             # Lưu người dùng vào cơ sở dữ liệu
             user.save()
+            print(f"Created user: {username}")
 
 if __name__ == "__main__":
     run()

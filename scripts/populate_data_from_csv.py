@@ -11,7 +11,8 @@ django.setup()
 from quiz.models import Topic, Question, Choice
 
 def run():
-    csv_file_path = r'.\scripts\Toiec.csv'
+    csv_file_path ="./scripts/Toiec.csv"   # Đường dẫn tới file CSV của bạn
+
 
     with open(csv_file_path, 'r', encoding='utf-8') as file:
         reader = csv.reader(file)
@@ -29,8 +30,13 @@ def run():
             # Tạo các lựa chọn cho câu hỏi
             for i in range(0, len(choices), 2):
                 choice_text = choices[i]
-                is_correct = choices[i + 1].lower() == 'true'
-                Choice.objects.create(question=question, text=choice_text, is_correct=is_correct)
+            # Kiểm tra xem còn đủ phần tử trong danh sách choices để truy cập
+                if i + 1 < len(choices):
+                    is_correct = choices[i + 1].lower() == 'true'
+                    Choice.objects.create(question=question, text=choice_text, is_correct=is_correct)
+                else:
+        # Xử lý trường hợp không đủ phần tử trong choices
+                    print("Lỗi: Không đủ phần tử trong danh sách choices")
 
     print('Dữ liệu đã được nhập thành công từ file CSV.')
 
