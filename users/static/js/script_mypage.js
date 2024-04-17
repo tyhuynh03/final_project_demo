@@ -11,9 +11,13 @@ function logout() {
     form.submit();
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 document.addEventListener("DOMContentLoaded", function () {
+=======
+document.addEventListener("DOMContentLoaded", function() {
+>>>>>>> 6ffb5672b476ad0d0ed13b274c059e3012d1c855
 =======
 document.addEventListener("DOMContentLoaded", function() {
 >>>>>>> 6ffb5672b476ad0d0ed13b274c059e3012d1c855
@@ -24,7 +28,11 @@ document.addEventListener("DOMContentLoaded", function() {
     let scrollAmount = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     nextBtn.addEventListener("click", function () {
+=======
+    nextBtn.addEventListener("click", function() {
+>>>>>>> 6ffb5672b476ad0d0ed13b274c059e3012d1c855
 =======
     nextBtn.addEventListener("click", function() {
 >>>>>>> 6ffb5672b476ad0d0ed13b274c059e3012d1c855
@@ -33,7 +41,11 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     prevBtn.addEventListener("click", function () {
+=======
+    prevBtn.addEventListener("click", function() {
+>>>>>>> 6ffb5672b476ad0d0ed13b274c059e3012d1c855
 =======
     prevBtn.addEventListener("click", function() {
 >>>>>>> 6ffb5672b476ad0d0ed13b274c059e3012d1c855

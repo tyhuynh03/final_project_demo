@@ -7,7 +7,6 @@ class TopicForm(forms.ModelForm):
         fields = ['name']
 
 class QuestionForm(forms.ModelForm):
-
     #topic = forms.ModelChoiceField(queryset=Topic.objects.all())
     
     class Meta:

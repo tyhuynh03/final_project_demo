@@ -25,7 +25,7 @@ header {
     align-items: center;
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    /* z-index: 1000; */
+    z-index: 1000;
 }
 
 header h2 {
@@ -223,22 +223,7 @@ header .navigation a:hover {
     line-height: 1.285714285714286;
     margin-top: auto;
 }
-.box-wrapper {
-    display: flex;
-    transition: transform 0.5s ease;
-}
-.prev-btn,
-.next-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: transparent;
-    border: none;
-    outline: none;
-    cursor: pointer;
-}
 
-<<<<<<< HEAD
 .box-wrapper {
     display: flex;
     transition: transform 0.5s ease;
@@ -253,6 +238,7 @@ header .navigation a:hover {
     border: none;
     outline: none;
     cursor: pointer;
+    transition: color 0.3s, transform 0.3s;
 }
 
 .prev-btn {
@@ -265,15 +251,14 @@ header .navigation a:hover {
     /* Khoảng cách từ mép phải của container */
 }
 
-=======
-.prev-btn {
-    left: 10px; /* Khoảng cách từ mép trái của container */
+.prev-btn:hover,
+.next-btn:hover {
+    color: #4255ff;
+    /* Màu chữ khi hover */
+    transform: translateY(-50%) scale(1.1);
+    /* Phóng to nút khi hover */
 }
 
-.next-btn {
-    right: 10px; /* Khoảng cách từ mép phải của container */
-}
->>>>>>> 6ffb5672b476ad0d0ed13b274c059e3012d1c855
 .create-question-box {
     background-color: #f0f0f0;
     /* Màu nền */

@@ -26,9 +26,16 @@ def question_detail(request, question_id):
 # thêm câu hỏi bằng thủ công
 @login_required
 def add_question(request):
+    topics = Topic.objects.all()
     if request.method == 'POST':
         question_form = QuestionForm(request.POST)
         choice_formset = ChoiceFormSet(request.POST)
+        form = TopicForm(request.POST)
+        if form.is_valid():
+            topic = form.save(commit=False)
+            topic.user = request.user  # Gán người tạo chủ đề
+            topic.save()
+
         if question_form.is_valid() and choice_formset.is_valid():
             topic_id = request.POST.get('topic_id')
             if topic_id:
@@ -41,35 +48,25 @@ def add_question(request):
             question.save()
             choice_formset.instance = question
             choice_formset.save()
-            return redirect('question_list')  # Điều hướng tới trang khác sau khi thêm câu hỏi và câu trả lời
+            return redirect('my_page')  
     else:
         user = request.user
         question_form = QuestionForm()
         choice_formset = ChoiceFormSet()
-        topic = Topic.objects.all()
-    return render(request, 'add_question.html', {'question_form': question_form, 'choice_formset': choice_formset, 'topics': topic})
-
-# def add_topic(request):
-#     if request.method == 'POST':
-        
-#         form = TopicForm(request.POST)
-#         if form.is_valid():
-#             topic = form.save(commit=False)
-#             topic.user = request.user
-#             topic.save()
-#             form.save()
-#             messages.success(request, 'Topic added successfully')
-#             return redirect('topic_manage')  # Chuyển hướng đến trang homeadmin    
-#     else:
-#         form = TopicForm()
-#     return render(request, 'topic_manage.html', {'form': form})
+        form = TopicForm()
+        # chỉ lấy chủ đề mà người dùng tạo
+        topics = Topic.objects.filter(user=user)
+    return render(request, 'add_question.html', {'question_form': question_form, 'choice_formset': choice_formset, 'topics': topics,'form': form})
 
 
 
-# thêm câu hỏi bằng file csv
+
+
+
 def import_question_from_csv(request):
     if request.method == 'POST' and 'question_file' in request.FILES:
         file = request.FILES['question_file']
+        user = request.user
         if file.name.endswith('.csv'):
             csv_text_wrapper = io.TextIOWrapper(file, encoding='utf-8')
             reader = csv.reader(csv_text_wrapper)
@@ -80,7 +77,7 @@ def import_question_from_csv(request):
                 choices = row[2:]
 
                 # Kiểm tra xem chủ đề đã tồn tại chưa, nếu không thì tạo mới
-                topic, created = Topic.objects.get_or_create(name=topic_name)
+                topic, created = Topic.objects.get_or_create(name=topic_name, user=user)
 
                 # Tạo câu hỏi và liên kết với chủ đề tương ứng
                 question = Question.objects.create(text=question_text, topic=topic)
@@ -91,7 +88,7 @@ def import_question_from_csv(request):
                     is_correct = choices[i + 1].lower() == 'true'
                     Choice.objects.create(question=question, text=choice_text, is_correct=is_correct)
 
-            return redirect('question_list')  # Chuyển hướng sau khi nhập dữ liệu thành công
+            return redirect('my_page')  # Chuyển hướng sau khi nhập dữ liệu thành công
         else:
             return JsonResponse({'error': 'Please upload a CSV file'}, status=400)
     else:

@@ -68,34 +68,87 @@
 </html> -->
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD
 
-=======
->>>>>>> 6ffb5672b476ad0d0ed13b274c059e3012d1c855
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Question</title>
-</head>
-<<<<<<< HEAD
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
 
-=======
->>>>>>> 6ffb5672b476ad0d0ed13b274c059e3012d1c855
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form h2 {
+            margin-top: 20px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        form input[type="text"],
+        form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        form button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        form button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+
 <body>
     <h1>Add Question</h1>
     <form method="post">
         {% csrf_token %}
+        <h2>Tên câu hỏi</h2>
         {{ question_form.as_p }}
+        <h2>Đáp án</h2>
         {{ choice_formset.as_p }}
         <label for="topic_id">Select a Topic:</label>
         <select name="topic_id" id="topic_id">
             <option value="">-- Choose a Topic --</option>
             {% for topic in topics %}
-<<<<<<< HEAD
+
             <option value="{{ topic.id }}">{{ topic.name }}</option>
-=======
-                <option value="{{ topic.id }}">{{ topic.name }}</option>
->>>>>>> 6ffb5672b476ad0d0ed13b274c059e3012d1c855
+
+            <option value="{{ topic.id }}">{{ topic.name }}</option>
+
             {% endfor %}
         </select>
         <br>
@@ -104,10 +157,7 @@
         <br>
         <button type="submit">Submit</button>
     </form>
-<<<<<<< HEAD
+
 </body>
 
 </html>
-=======
-</body>
->>>>>>> 6ffb5672b476ad0d0ed13b274c059e3012d1c855

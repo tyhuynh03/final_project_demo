@@ -206,13 +206,16 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         return context
 class MyPageView(LoginRequiredMixin, TemplateView):
     template_name = 'mypage.html'
-
+    
     def get_context_data(self, **kwargs):
+        
         context = super().get_context_data(**kwargs)
+        current_user = self.request.user
         topics = Topic.objects.all()
         for topic in topics:
             topic.question_count = topic.questions.count()
             topic.created_by = topic.user.username
         context['topics'] = topics
+        context['current_user'] = current_user.username
         return context
 
