@@ -1,5 +1,5 @@
 ﻿# final_project_demo
-- Để sử dụng đầu tiên chúng ta cần cài đặt Django_extension bằng lệnh: "pip install django_extension"
+- Để sử dụng đầu tiên chúng ta cần cài đặt Django_extensions bằng lệnh: "pip install django_extensions"
 - python manage.py makemigrations
 - python manage.py migrate
 - python manage.py runscript import_data
